@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUIA DE PLATINA NTC GTA VI PASFODA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vcbg: '#080510',
+            vcard: '#120b24',
+            vcpink: '#ff2a85',
+            vccyan: '#00f0ff',
+            vcpurple: '#9d4edd',
+            vcgold: '#ffd166',
+            vcsilver: '#cbd5e1',
+            vcbronze: '#e08e55'
+          },
+          fontFamily: {
+            display: ['Impact', 'Arial Black', 'sans-serif'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #080510;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(255, 42, 133, 0.22), transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(0, 240, 255, 0.18), transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(157, 78, 221, 0.16), transparent 50%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    .neon-pink-text {
+      text-shadow: 0 0 10px rgba(255, 42, 133, 0.8), 0 0 24px rgba(255, 42, 133, 0.45);
+    }
+    .neon-cyan-text {
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 24px rgba(0, 240, 255, 0.45);
+    }
+    .neon-card {
+      background: rgba(18, 11, 36, 0.86);
+      border: 1px solid rgba(255, 42, 133, 0.28);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .neon-card:hover {
+      border-color: rgba(0, 240, 255, 0.65);
+      box-shadow: 0 10px 32px rgba(255, 42, 133, 0.18), 0 0 16px rgba(0, 240, 255, 0.14);
+      transform: translateY(-2px);
+    }
+    .neon-card.unlocked {
+      border-color: rgba(0, 240, 255, 0.55);
+      background: linear-gradient(145deg, rgba(18, 11, 36, 0.95), rgba(0, 240, 255, 0.06));
+    }
+    .spoiler-blur {
+      filter: blur(6px);
+      user-select: none;
+    }
+    .spoiler-blur:hover {
+      filter: blur(2px);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-vcpink selection:text-white">
+  <header class="border-b border-vcpink/30 bg-vcbg/85 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-block w-3 h-3 rounded-full bg-vcpink shadow-[0_0_10px_#ff2a85]"></span>
+        <span class="text-xs sm:text-sm font-bold tracking-widest uppercase text-vccyan neon-cyan-text">LEONIDA • VICE CITY • PS5</span>
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <button id="btn-reset" class="px-3 py-1.5 rounded-lg bg-vcard border border-red-500/40 text-red-300 hover:bg-red-500/15 transition cursor-pointer">Resetar</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <!-- Hero -->
+    <section class="rounded-2xl p-6 sm:p-8 border border-vcpink/40 bg-gradient-to-br from-[#190d33] via-[#120926] to-[#081524] shadow-[0_0_40px_rgba(255,42,133,0.18)]">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <p class="text-xs uppercase tracking-[0.25em] text-vccyan font-semibold">Checklist Interativo • 55 Troféus • 100% Single-Player</p>
+          <h1 class="font-display text-3xl sm:text-5xl tracking-wide leading-tight uppercase">
+            GUIA DE PLATINA <span class="text-vcpink neon-pink-text">NTC</span> GTA VI <span class="text-vccyan neon-cyan-text">PASFODA</span>
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base max-w-2xl">
+            Acompanhe cada troféu de <strong class="text-white">Grand Theft Auto VI</strong> no PS5, filtre por categoria, raridade ou perdíveis, ative o modo anti-spoiler e salve seu progresso automaticamente no navegador.
+          </p>
+        </div>
+
+        <div class="bg-vcbg/80 border border-vccyan/35 rounded-xl p-4 min-w-[250px]">
+          <div class="flex items-baseline justify-between mb-2">
+            <span class="text-xs uppercase tracking-wider text-slate-400">Progresso Total</span>
+            <span id="progress-count" class="text-lg font-extrabold text-vccyan neon-cyan-text">0 / 55</span>
+          </div>
+          <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden mb-2">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-vcpink via-vcpurple to-vccyan transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-slate-400">
+            <span id="progress-pct">0% concluído</span>
+            <span id="rarity-summary">1P • 2O • 6Pr • 46B</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avisos Rápidos -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/10 text-xs sm:text-sm">
+        <div class="p-3.5 rounded-xl bg-vcbg/65 border border-vcpink/25">
+          <strong class="text-vcpink block mb-1">Sem Troféus Online</strong>
+          <span class="text-slate-300">Todos os 55 troféus são conquistados no modo história/single-player.</span>
+        </div>
+        <div class="p-3.5 rounded-xl bg-vcbg/65 border border-vccyan/25">
+          <strong class="text-vccyan block mb-1">Saves Manuais & Perdíveis</strong>
+          <span class="text-slate-300">Faça saves manuais no início de cada capítulo e atenção a eventos/meditação.</span>
+        </div>
+        <div class="p-3.5 rounded-xl bg-vcbg/65 border border-vcgold/25">
+          <strong class="text-vcgold block mb-1">Cheats Desativam Troféus</strong>
+          <span class="text-slate-300">Evite ativar códigos de trapaça no seu save principal de platina.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filtros e Busca -->
+    <section class="space-y-4">
+      <div class="flex flex-col md:flex-row gap-3">
+        <div class="flex-1 relative">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Buscar troféu por nome, descrição ou dica..."
+            class="w-full px-4 py-2.5 rounded-xl bg-vcard border border-white/15 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-vccyan"
+          />
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <select id="category-filter" class="px-3.5 py-2.5 rounded-xl bg-vcard border border-white/15 text-sm text-white focus:outline-none focus:border-vcpink cursor-pointer">
+            <option value="all">Todas as Categorias</option>
+            <option value="platina-ouro">Platina e Ouro</option>
+            <option value="historia">História (Campanha)</option>
+            <option value="exploracao">Exploração & Atividades</option>
+            <option value="estranhos">Estranhos & Doidos</option>
+            <option value="crime">Crime, Dinheiro & Propriedades</option>
+            <option value="ocultos">Ocultos & Easter Eggs</option>
+          </select>
+
+          <select id="grade-filter" class="px-3.5 py-2.5 rounded-xl bg-vcard border border-white/15 text-sm text-white focus:outline-none focus:border-vccyan cursor-pointer">
+            <option value="all">Todas as Raridades</option>
+            <option value="platinum">Platina</option>
+            <option value="gold">Ouro</option>
+            <option value="silver">Prata</option>
+            <option value="bronze">Bronze</option>
+          </select>
+
+          <select id="status-filter" class="px-3.5 py-2.5 rounded-xl bg-vcard border border-white/15 text-sm text-white focus:outline-none focus:border-vcpink cursor-pointer">
+            <option value="all">Todos os Status</option>
+            <option value="unlocked">Conquistados</option>
+            <option value="locked">Pendentes</option>
+            <option value="missable">Perdíveis / Atenção</option>
+          </select>
+
+          <button id="btn-spoiler" class="px-3.5 py-2.5 rounded-xl bg-vcard border border-vcpurple/50 text-sm text-purple-200 hover:bg-vcpurple/20 transition cursor-pointer">
+            Ocultar Spoilers: OFF
+          </button>
+        </div>
+      </div>
+
+      <div id="results-info" class="text-xs text-slate-400">Exibindo 55 de 55 troféus</div>
+    </section>
+
+    <!-- Container de Troféus -->
+    <section id="trophies-container" class="space-y-8"></section>
+  </main>
+
+  <footer class="border-t border-white/10 mt-16 py-6 text-center text-xs text-slate-400">
+    <p>GUIA DE PLATINA NTC GTA VI PASFODA • Progresso salvo localmente no navegador</p>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'guia_platina_ntc_gta6_pasfoda_v1';
+
+    const CATEGORIES = {
+      'platina-ouro': 'Platina e Ouro',
+      'historia': 'História (Campanha)',
+      'exploracao': 'Exploração, Colecionáveis e Atividades',
+      'estranhos': 'Estranhos, Doidos e Missões Secundárias',
+      'crime': 'Crime, Dinheiro e Propriedades',
+      'ocultos': 'Ocultos e Easter Eggs'
+    };
+
+    const TROPHIES = [
+      // Platina e Ouro
+      { id: 't01', name: 'Vice Got a Price!', ptName: 'O vício tem um preço!', grade: 'platinum', category: 'platina-ouro', spoiler: false, missable: false, desc: 'Desbloqueie todos os outros 54 troféus do jogo.', tip: 'Conquiste todos os troféus de Bronze, Prata e Ouro em uma conta PSN.' },
+      { id: 't02', name: 'A Long Road', ptName: 'Uma longa estrada', grade: 'gold', category: 'platina-ouro', spoiler: false, missable: true, desc: 'Alcance 100% de conclusão no jogo.', tip: 'Acompanhe em Progresso > Estatísticas > Conclusão 100%. Exige grande parte do conteúdo (300/397 acrobacias, 15/18 conjuntos de cartas, 200/277 veículos escaneados, 42 ouros no estande, etc.).' },
+      { id: 't03', name: 'You Gotta Know When to Get Off', ptName: 'Você precisa saber a hora de descer', grade: 'gold', category: 'platina-ouro', spoiler: true, missable: false, desc: 'Conclua a última missão da campanha principal (Capítulo 5).', tip: 'Complete a história principal até o encerramento do Capítulo 5.' },
+
+      // História
+      { id: 't04', name: 'Just Like Paradise', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua a missão Gone Fishing.', tip: 'Desbloqueia naturalmente durante a campanha.' },
+      { id: 't05', name: 'Paradise Lost', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua o Capítulo 1.', tip: 'Avance na história até o fim do Capítulo 1.' },
+      { id: 't06', name: "T**s Ass Drug Money", grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua o Capítulo 2.', tip: 'Avance na história até o fim do Capítulo 2.' },
+      { id: 't07', name: 'Vice City, Baby!', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua o Capítulo 3.', tip: 'Avance na história até o fim do Capítulo 3.' },
+      { id: 't08', name: 'Top of the World, Ma', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua o Capítulo 4.', tip: 'Avance na história até o fim do Capítulo 4.' },
+      { id: 't09', name: 'Trust', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua a missão Breakfast Run.', tip: 'Desbloqueia naturalmente na campanha principal.' },
+      { id: 't10', name: 'Break the Bank', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua o golpe The Cartel Heist.', tip: 'Desbloqueia ao finalizar o golpe da história.' },
+      { id: 't11', name: 'Family Matters', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: "Conclua a missão Child's Play.", tip: 'Desbloqueia naturalmente na campanha principal.' },
+      { id: 't12', name: 'DWNFALL', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua a missão Headliners.', tip: 'Desbloqueia naturalmente na campanha principal.' },
+      { id: 't13', name: 'Hi-Jacked', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua a missão VCIA Takedown.', tip: 'Desbloqueia naturalmente na campanha principal.' },
+      { id: 't14', name: 'Snow Storm', grade: 'bronze', category: 'historia', spoiler: true, missable: false, desc: 'Conclua a missão Operation Savage Glory.', tip: 'Desbloqueia naturalmente na campanha principal.' },
+
+      // Exploração e Atividades
+      { id: 't15', name: 'The Goodtime State', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Explore todo o mapa de Leonida.', tip: 'Remova a névoa de todo o mapa viajando por terra, mar e ar (helicóptero agiliza bastante).' },
+      { id: 't16', name: 'You WAiNKer!', grade: 'silver', category: 'exploracao', spoiler: false, missable: false, desc: 'Use o aplicativo WAiNK do celular para escanear/registrar 100 localizações diferentes.', tip: 'Fotografe/escaneie pontos turísticos, curiosidades e esculturas em Leonida.' },
+      { id: 't17', name: "Don't Touch My Deck", grade: 'silver', category: 'exploracao', spoiler: false, missable: false, desc: 'Complete 3 conjuntos completos de Cartas Colecionáveis.', tip: 'Há 18 conjuntos no jogo; o troféu pede 3 completos (o 100% pede 15).' },
+      { id: 't18', name: 'Cunning Stunts', grade: 'silver', category: 'exploracao', spoiler: false, missable: false, desc: 'Complete 250 acrobacias (Stunts) pelo mapa.', tip: 'Inclui saltos únicos, passagens sob pontes e manobras; os 100% exigem 300.' },
+      { id: 't19', name: 'Positive Mental Attitude', grade: 'bronze', category: 'exploracao', spoiler: false, missable: true, desc: 'Medite em todos os pontos de meditação marcados em Leonida.', tip: 'Atenção: há ponto perdível no Capítulo 1 na casa do Jason em Leonida Keys. Faça todos no mesmo save.' },
+      { id: 't20', name: 'Master of None', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Experimente cada tipo de atividade/minigame do jogo pelo menos uma vez.', tip: 'Jogue golfe, boliche, pesca, fliperama, estande de tiro e demais atividades.' },
+      { id: 't21', name: 'The Shootist', grade: 'silver', category: 'exploracao', spoiler: false, missable: false, desc: 'Conquiste medalha de ouro em todos os 42 desafios dos estandes de tiro.', tip: 'Desafios ficam em Rodgers Ranch e Griffin Shooting Range.' },
+      { id: 't22', name: 'Earn Cash, Not Kudos', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Vença 20 corridas diferentes espalhadas pelo mapa.', tip: 'Complete e vença 20 provas distintas.' },
+      { id: 't23', name: 'Top Fun', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Vença uma corrida de drones (Top Fun Drone Race) em cada localização do mapa.', tip: 'Vença ao menos uma vez em cada ponto de corrida de drones.' },
+      { id: 't24', name: 'Baited My Tackle', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Derrote o personagem Cal em um desafio de pesca.', tip: 'Vença o duelo de pesca contra Cal.' },
+      { id: 't25', name: 'Stick Fiddler', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Zere/complete um jogo de fliperama (Arcade) até o fim.', tip: 'Vença/termine uma máquina de fliperama completa.' },
+      { id: 't26', name: 'Whip It Good', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Descubra/escaneie 100 veículos diferentes.', tip: 'Entre, dirija ou escaneie 100 modelos distintos de veículos.' },
+      { id: 't27', name: 'One Last Thing', grade: 'bronze', category: 'exploracao', spoiler: false, missable: false, desc: 'Complete 50 Desafios (Challenges) do jogo.', tip: 'Acompanhe os desafios disponíveis e conclua 50 deles.' },
+
+      // Estranhos e Doidos
+      { id: 't28', name: 'Strangers & Freaks', grade: 'silver', category: 'estranhos', spoiler: false, missable: true, desc: 'Complete 8 linhas de missões de Estranhos e Doidos em Leonida.', tip: 'Fique atento a missões secundárias com janela de tempo/capítulo.' },
+      { id: 't29', name: 'Road to Rehabilitation', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Complete a missão final da linha do personagem Andy.', tip: 'Finalize toda a cadeia de missões do Andy.' },
+      { id: 't30', name: 'This Was No Boat Accident', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Complete a missão final da linha do personagem Kenton.', tip: 'Finalize toda a cadeia de missões do Kenton.' },
+      { id: 't31', name: 'The Lone Rider', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Complete a missão final da linha do personagem Billy.', tip: 'Finalize toda a cadeia de missões do Billy.' },
+      { id: 't32', name: 'Supply & Demand', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Complete a missão final da linha do personagem Randy.', tip: 'Envolve roubo e entrega de veículos específicos pedidos por Randy.' },
+      { id: 't33', name: 'Spin On This!', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Complete a missão final da linha do personagem Tyrone.', tip: 'Finalize toda a cadeia de missões do Tyrone.' },
+      { id: 't34', name: 'Fair Game', grade: 'bronze', category: 'estranhos', spoiler: false, missable: false, desc: 'Cace um animal único/lendário para o personagem Bret.', tip: 'Localize e cace o animal lendário solicitado por Bret.' },
+
+      // Crime, Dinheiro e Propriedades
+      { id: 't35', name: 'Maximum Withdrawal', grade: 'silver', category: 'crime', spoiler: false, missable: false, desc: 'Assalte 5 cofres de banco diferentes e consiga escapar da polícia.', tip: 'Abra 5 cofres distintos e despiste o nível de procurado.' },
+      { id: 't36', name: 'Pest Control', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Assalte/desmantele pelo menos uma Operação Ilegal pertencente a cada gangue.', tip: 'Elimine/invada ao menos um ponto ilegal de cada facção.' },
+      { id: 't37', name: 'Sneakthief', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Assalte uma joalheria sem ser detectado.', tip: 'Execute o roubo de forma furtiva, sem disparar alarmes ou alertar guardas.' },
+      { id: 't38', name: 'A Classic Blitz Play', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Assalte um carro-forte (Armored Truck) na rua e escape da polícia.', tip: 'Intercepte o carro-forte, pegue o dinheiro e fuja da polícia.' },
+      { id: 't39', name: 'Retail Therapy', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Com seu parceiro(a) acompanhando você, assalte 3 lojas seguidas sem perder o nível de procurado.', tip: 'Mantenha Jason e Lucia juntos e emende 3 assaltos sem deixar a polícia sumir.' },
+      { id: 't40', name: 'Hot Together', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Alcance um nível de procurado de 4 estrelas com seu parceiro(a) e despiste a polícia.', tip: 'Chegue a 4 estrelas acompanhado do parceiro e escape.' },
+      { id: 't41', name: 'Dime on the Dollar', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Ganhe US$ 250.000 lavando Notas Marcadas (Marked Bills) pelos seus contatos.', tip: 'Colete Marked Bills em roubos/caixas eletrônicos e lave com contatos.' },
+      { id: 't42', name: 'Treat Yo Self', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Gaste um total acumulado de US$ 100.000 em lojas.', tip: 'Some US$ 100k gastos em roupas, armas, melhorias e afins.' },
+      { id: 't43', name: 'Little Boxes', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Compre todas as propriedades com garagem disponíveis no mapa.', tip: 'Acumule dinheiro e adquira todas as garagens/propriedades.' },
+      { id: 't44', name: 'On the Spot', grade: 'bronze', category: 'crime', spoiler: false, missable: false, desc: 'Registre 10 veículos no aplicativo Scooter Bros no celular.', tip: 'Cadastre 10 veículos no app Scooter Bros.' },
+
+      // Ocultos e Easter Eggs
+      { id: 't45', name: 'Gunslinger', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Elimine 5 inimigos em uma única ativação do Foco de Combate (Combat Focus).', tip: 'Ative o Combat Focus em um grupo denso de inimigos e acerte 5 abates seguidos.' },
+      { id: 't46', name: 'Actions Speak Louder', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Realize 500 ações que afetem seu Perfil Criminal.', tip: 'Ative as notificações de Perfil Criminal nas opções de HUD para acompanhar.' },
+      { id: 't47', name: 'Personal Best', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Alcance o nível máximo de Força com ambos os protagonistas (Jason e Lucia).', tip: 'Treine na academia e use shakes de proteína com ambos até o topo.' },
+      { id: 't48', name: 'Catch Me If You Can', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'No aeroporto VCIA, entre em um avião comercial nos portões (ex.: E3/E4), decole e voe por pelo menos 1 km.', tip: 'Acesse uma aeronave conectada à ponte de embarque e voe por 1 km ou mais.' },
+      { id: 't49', name: 'Challenging Tank', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Invada a Mile Zero Air Station (Mariana County), roube um tanque Rhino e dirija-o.', tip: 'Entre na base aérea a sudoeste, pegue o tanque e, se necessário, dispare em combate.' },
+      { id: 't50', name: 'In The Beginning…', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Vá ao Ocean View Rooftop Bar em Ocean Beach, peça um Apple Martini e beba apreciando a vista.', tip: 'Referência clássica a GTA: Vice City.' },
+      { id: 't51', name: 'Capital Offense', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Após o Key Cloner (Cap. 3), vá à Sunrise Premium Autos, hackeie o Bravado Banshee azul e saia quebrando a vitrine.', tip: 'Homenagem direta à abertura de GTA III.' },
+      { id: 't52', name: "Let's Go Bowling", grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Vá à pista de boliche (Kolt & Associates / Kingpin Bowling), conclua a partida e pegue os itens secretos.', tip: 'Referência a GTA IV; explore os fundos/cofre após jogar.' },
+      { id: 't53', name: 'Ten Pin', grade: 'bronze', category: 'ocultos', spoiler: false, missable: false, desc: 'Derrube 10 pedestres com chutes em cima de moto ou bicicleta em pouco tempo (~60s).', tip: 'A orla de Washington Beach tem bastante movimento para emendar os chutes.' },
+      { id: 't54', name: 'Bad Luck, I Guess', grade: 'bronze', category: 'ocultos', spoiler: true, missable: true, desc: 'No Cap. 3+, vá sozinho com a Lucia à loja Payday Loans de Little Cuba, limpe as 3 gavetas e fuja 100% a pé.', tip: 'Não entre em nenhum veículo durante a fuga para não anular o troféu.' },
+      { id: 't55', name: 'The Truth Is Out There', grade: 'bronze', category: 'ocultos', spoiler: true, missable: false, desc: 'Vivencie o evento do OVNI à noite a leste de Port Gellhorn (perto do Starlet Motel) ou o evento no Marbelle Hotel.', tip: 'Siga a luz azul na mata, fale com a mulher do carro vermelho e aceite ajudar para ser abduzido.' }
+    ];
+
+    let state = {
+      unlocked: {},
+      hideSpoilers: false
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            state.unlocked = parsed.unlocked || {};
+            state.hideSpoilers = Boolean(parsed.hideSpoilers);
+          }
+        }
+      } catch (e) {
+        console.warn('Falha ao carregar estado:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn('Falha ao salvar estado:', e);
+      }
+    }
+
+    function gradeBadge(grade) {
+      const map = {
+        platinum: { label: 'Platina', cls: 'bg-sky-400/20 text-sky-200 border-sky-300/50' },
+        gold: { label: 'Ouro', cls: 'bg-amber-400/20 text-amber-300 border-amber-400/40' },
+        silver: { label: 'Prata', cls: 'bg-slate-300/20 text-slate-200 border-slate-300/40' },
+        bronze: { label: 'Bronze', cls: 'bg-orange-500/20 text-orange-300 border-orange-400/40' }
+      };
+      const item = map[grade] || map.bronze;
+      return `<span class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full border ${item.cls}">${item.label}</span>`;
+    }
+
+    function updateProgress() {
+      const total = TROPHIES.length;
+      const done = TROPHIES.filter(t => Boolean(state.unlocked[t.id])).length;
+      const pct = Math.round((done / total) * 100);
+
+      document.getElementById('progress-count').textContent = `${done} / ${total}`;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+      document.getElementById('progress-pct').textContent = `${pct}% concluído`;
+    }
+
+    function render() {
+      updateProgress();
+
+      const spoilerBtn = document.getElementById('btn-spoiler');
+      spoilerBtn.textContent = `Ocultar Spoilers: ${state.hideSpoilers ? 'ON' : 'OFF'}`;
+      spoilerBtn.classList.toggle('border-vcpink', state.hideSpoilers);
+      spoilerBtn.classList.toggle('text-vcpink', state.hideSpoilers);
+
+      const q = document.getElementById('search-input').value.trim().toLowerCase();
+      const cat = document.getElementById('category-filter').value;
+      const grade = document.getElementById('grade-filter').value;
+      const status = document.getElementById('status-filter').value;
+
+      const filtered = TROPHIES.filter(t => {
+        const isUnlocked = Boolean(state.unlocked[t.id]);
+        if (cat !== 'all' && t.category !== cat) return false;
+        if (grade !== 'all' && t.grade !== grade) return false;
+        if (status === 'unlocked' && !isUnlocked) return false;
+        if (status === 'locked' && isUnlocked) return false;
+        if (status === 'missable' && !t.missable) return false;
+
+        if (q) {
+          const hay = `${t.name} ${t.ptName || ''} ${t.desc} ${t.tip}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('results-info').textContent = `Exibindo ${filtered.length} de ${TROPHIES.length} troféus`;
+
+      const container = document.getElementById('trophies-container');
+      container.innerHTML = '';
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="rounded-2xl p-10 text-center border border-white/10 bg-vcard">
+            <p class="text-slate-300 font-medium mb-2">Nenhum troféu encontrado com esses filtros.</p>
+            <button id="btn-clear-filters" class="px-4 py-2 rounded-xl bg-vcpink text-white text-xs font-bold uppercase tracking-wider cursor-pointer">Limpar Filtros</button>
+          </div>
+        `;
+        document.getElementById('btn-clear-filters')?.addEventListener('click', () => {
+          document.getElementById('search-input').value = '';
+          document.getElementById('category-filter').value = 'all';
+          document.getElementById('grade-filter').value = 'all';
+          document.getElementById('status-filter').value = 'all';
+          render();
+        });
+        return;
+      }
+
+      const order = Object.keys(CATEGORIES);
+      order.forEach(catKey => {
+        const group = filtered.filter(t => t.category === catKey);
+        if (group.length === 0) return;
+
+        const section = document.createElement('div');
+        section.className = 'space-y-4';
+
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between border-b border-white/10 pb-2';
+        header.innerHTML = `
+          <h2 class="text-lg sm:text-xl font-extrabold tracking-wide text-white">${CATEGORIES[catKey]}</h2>
+          <span class="text-xs font-semibold text-vccyan">${group.filter(x => state.unlocked[x.id]).length}/${group.length}</span>
+        `;
+        section.appendChild(header);
+
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+        group.forEach(t => {
+          const isUnlocked = Boolean(state.unlocked[t.id]);
+          const blurClass = (state.hideSpoilers && t.spoiler && !isUnlocked) ? 'spoiler-blur' : '';
+
+          const card = document.createElement('article');
+          card.className = `neon-card rounded-2xl p-5 flex flex-col justify-between gap-4 ${isUnlocked ? 'unlocked' : ''}`;
+
+          card.innerHTML = `
+            <div class="space-y-2.5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white leading-snug">${t.name}</h3>
+                  ${t.ptName ? `<p class="text-xs text-vcpink font-medium">${t.ptName}</p>` : ''}
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${t.missable ? `<span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/40">Perdível</span>` : ''}
+                  ${gradeBadge(t.grade)}
+                </div>
+              </div>
+
+              <p class="text-sm text-slate-200 leading-relaxed ${blurClass}">${t.desc}</p>
+              <p class="text-xs text-slate-400 bg-vcbg/70 border border-white/5 rounded-xl p-3 leading-relaxed ${blurClass}">
+                <strong class="text-vccyan">Dica:</strong> ${t.tip}
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+              <span class="text-xs font-semibold ${isUnlocked ? 'text-vccyan' : 'text-slate-400'}">
+                ${isUnlocked ? 'Conquistado' : 'Pendente'}
+              </span>
+              <button
+                type="button"
+                data-id="${t.id}"
+                class="toggle-trophy px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer ${
+                  isUnlocked
+                    ? 'bg-vccyan/20 text-vccyan border border-vccyan/50 hover:bg-vccyan/30'
+                    : 'bg-vcpink/20 text-vcpink border border-vcpink/50 hover:bg-vcpink/30'
+                }"
+              >
+                ${isUnlocked ? 'Desmarcar' : 'Marcar Troféu'}
+              </button>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+
+      document.querySelectorAll('.toggle-trophy').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          if (state.unlocked[id]) {
+            delete state.unlocked[id];
+          } else {
+            state.unlocked[id] = true;
+          }
+          saveState();
+          render();
+        });
+      });
+    }
+
+    document.getElementById('search-input').addEventListener('input', render);
+    document.getElementById('category-filter').addEventListener('change', render);
+    document.getElementById('grade-filter').addEventListener('change', render);
+    document.getElementById('status-filter').addEventListener('change', render);
+
+    document.getElementById('btn-spoiler').addEventListener('click', () => {
+      state.hideSpoilers = !state.hideSpoilers;
+      saveState();
+      render();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (confirm('Deseja realmente resetar todos os troféus marcados?')) {
+        state.unlocked = {};
+        saveState();
+        render();
+      }
+    });
+
+    loadState();
+    render();
+  </script>
+</body>
+</html>
